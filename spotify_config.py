@@ -53,4 +53,4 @@ class SpotifyConfig:
         except KeyError:
             print("Wrong parameters parsed in the API request")
         else:
-            print("The playlist has been created and modified!")
+            print("The playlist has been created and modified.")
