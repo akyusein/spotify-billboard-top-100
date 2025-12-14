@@ -23,7 +23,9 @@ class SpotifyConfig:
             next_response = requests.get(url=self.search_endpoint, params=search_params, headers=self.auth)
             if data := next_response.json()["tracks"]["items"]:
                 for track in data:
-                    track_uris.append(track["uri"])
+                    for artist in track["artists"]:
+                        if artist["name"].lower() in index and track["uri"] not in track_uris:
+                            track_uris.append(track["uri"])
         return track_uris
 
     def create_playlist(self, uris):
