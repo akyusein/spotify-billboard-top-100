@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 from utils import USER_AGENT
 
 class Scraper:
@@ -28,12 +29,13 @@ class Scraper:
         track_list = []
         titles = soup.find_all(name="a", class_="chart-name font-bold inline-block")
         for track in titles:
-            track = track.get_text().replace("RE", "").strip()
-            clean_track = track.split("New")
-            if clean_track[0] != "":
-                track_list.append(clean_track[0].lower())
+            clean = track.get_text().replace("New", "").strip()
+            match = re.search("^RE", clean)
+            if match and track.span.get_text() == "RE":
+                new = re.sub("^RE", "", clean)
+                track_list.append(new.lower())
             else:
-                track_list.append(clean_track[1].lower())
+                track_list.append(clean.lower())
         return track_list
 
     def collect_information(self):

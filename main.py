@@ -5,7 +5,7 @@ user_input = input("Which year do you want to travel to? Provide the data in YYY
 
 def main():
     scraper = Scraper(user_input, website_url="https://www.officialcharts.com/charts/singles-chart/")
-    spot_config = SpotifyConfig(playlist_name="UK Flames", description="Hottest Tracks Currently of 2025")
+    spot_config = SpotifyConfig(playlist_name="Top of the Morning", description="Best tracks in the UK for 2025")
 
     collected_info = scraper.collect_information()
 
